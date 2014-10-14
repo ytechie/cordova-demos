@@ -1,0 +1,28 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Leaflet</title>
+    <link rel="stylesheet" href="leaflet/leaflet.css" />
+    <script src="scripts/winstore-jscompat.js"></script>
+    <script src="leaflet/leaflet.js"></script>
+    <script src="cordova.js"></script>
+</head>
+    <body>
+        <h2><a href="index.html">&lt; Back</a></h2>
+        
+        <p>
+            This shows how to get the uuid of the device. In the config.xml, be sure to enable the device plugin.
+        </p>
+
+        <h2>UUID: <span id="uuidContainer">Unknown</span></h2>
+        <script>
+            document.addEventListener("deviceready", function() {
+
+                var uuid = device.uuid;
+
+                var spanRef = document.getElementById("uuidContainer");
+                spanRef.innerText = uuid;
+            }, false);
+        </script>
+    </body>
+</html>

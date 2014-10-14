@@ -1,0 +1,34 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Leaflet</title>
+    <link rel="stylesheet" href="leaflet/leaflet.css" />
+    <script src="scripts/winstore-jscompat.js"></script>
+    <script src="leaflet/leaflet.js"></script>
+    <script src="cordova.js"></script>
+</head>
+    <body>
+        <h2><a href="index.html">&lt; Back</a></h2>
+        <p>
+            This is a demonstration of Leaflet.js running thanks to the <a href="https://github.com/MsopenTech/winstore-jscompat">jscompat shim</a>.
+        </p>
+
+        <div style="width:800px; height:800px;" id="map">You shouldn't see this</div>
+        <script type='text/javascript'>
+            var map, osm;
+
+            function test() {
+                console.log("CLICK TEST");
+            }
+
+            map = new L.Map('map', { center: new L.LatLng(67.6755, 33.936), zoom: 10 });
+            osm = new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png');
+
+            map.addControl(new L.Control.Layers({ 'OSM': osm }, {}));
+
+            var p = L.marker([51.5, -0.09]).addTo(map)
+                .bindPopup('<a onclick="test()">P1311200320</a><br/>DOMESTIC TROULBE<br/>123 E MAIN ST LVIL').openPopup();
+
+        </script>
+    </body>
+</html>
