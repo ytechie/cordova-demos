@@ -17,8 +17,8 @@
         <script type='text/javascript'>
             var map, osm;
 
-            function test() {
-                console.log("CLICK TEST");
+            function test(clickCode) {
+                console.log("CLICK TEST " +  clickCode);
             }
 
             map = new L.Map('map', { center: new L.LatLng(67.6755, 33.936), zoom: 10 });
@@ -27,8 +27,25 @@
             map.addControl(new L.Control.Layers({ 'OSM': osm }, {}));
 
             var p = L.marker([51.5, -0.09]).addTo(map)
-                .bindPopup('<a onclick="test()">P1311200320</a><br/>DOMESTIC TROULBE<br/>123 E MAIN ST LVIL').openPopup();
+                .bindPopup('<a class="clickCode" data-code="123">P1311200320</a><br/>DOMESTIC TROULBE<br/>123 E MAIN ST LVIL').openPopup();
 
+            //The winstore-jscompat script breaks inline functions in dynamic HTML,
+            //so we need to imperatively add the event logic based on attributes
+            function initClickables() {
+                var i, dataCode;
+                var clickables = document.getElementsByClassName("clickCode");
+
+                for(i = 0; i < clickables.length; i++) {
+                    dataCode = clickables[i].getAttribute("data-code");
+                    if (dataCode) {
+                        clickables[i].onclick = function() {
+                            test(dataCode);
+                        }
+                    }
+                }
+            }
+
+            initClickables();
         </script>
     </body>
 </html>
